@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Local-first LLM interpretability, token tracing, weight inventory and intervention workbench.">
+  <title>LLM Insight Platform</title><link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">∿</div><div><strong>LLM Insight</strong><span>ENTERPRISE WORKBENCH</span></div></div>
+    <div class="workspace"><span class="workspace-icon">V</span><div><small>WORKSPACE</small><b>Local Lab</b></div><span class="chevron">⌄</span></div>
+    <div class="nav-label">MODEL ANALYSIS</div>
+    <nav id="navigation">
+      <button class="nav-item active" data-view="overview"><span>▦</span> Overview</button>
+      <button class="nav-item" data-view="trace"><span>⌁</span> Token trace <kbd>01</kbd></button>
+      <button class="nav-item" data-view="weights"><span>⬡</span> Weight explorer <kbd>02</kbd></button>
+      <button class="nav-item" data-view="features"><span>✳</span> Feature atlas <kbd>03</kbd></button>
+      <button class="nav-item" data-view="interventions"><span>⤳</span> Interventions <kbd>04</kbd></button>
+      <button class="nav-item" data-view="evaluations"><span>◷</span> Evaluation <kbd>05</kbd></button>
+    </nav>
+    <div class="side-bottom"><div class="privacy-card"><span class="green-dot"></span><div><b>Local-first mode</b><p>Prompts and model files stay on this machine.</p></div></div><button class="nav-item" data-view="settings"><span>⚙</span> Model settings</button><div class="user-row"><div class="avatar">VA</div><div><b>Vivek AIML</b><small>Workspace owner</small></div><span class="more">···</span></div></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div class="breadcrumbs"><span>Workspace</span><i>/</i><b id="crumb">Overview</b></div><div class="top-right"><span class="model-state"><i id="statusDot"></i><span id="modelStatus">Demo mode</span></span><button class="icon-button" title="Help">?</button><div class="avatar small">VA</div></div></header>
+    <div class="page-wrap">
+      <section class="page-heading"><div><div class="eyebrow">MODEL OBSERVABILITY <span class="badge">LOCAL</span></div><h1 id="pageTitle">Understand every token.</h1><p id="pageSubtitle">Inspect how an open-weight language model transforms a prompt into its next-token decision.</p></div><button class="button secondary" id="openModel">＋ Connect local model</button></section>
+      <section id="notice" class="notice"><span class="notice-icon">✦</span><div><b>Explore the workbench in demo mode</b><span>Illustrative values below are simulated. Load a model from disk to see real logits, activations and parameter metadata.</span></div><button id="dismissNotice" class="close">×</button></section>
+      <section class="run-card"><div class="run-head"><div><span class="section-kicker">INFERENCE TRACE</span><h2>Run a prompt</h2></div><span class="privacy-pill"><i></i> Private to this session</span></div><textarea id="prompt" rows="2">A transformer predicts the next token by</textarea><div class="run-controls"><label>New tokens <input id="tokenCount" type="number" min="1" max="64" value="8"></label><label>Temperature <input id="temperature" type="number" min="0.05" max="2" step="0.1" value="0.7"></label><span class="control-note">Greedy at 0.05 · sampled otherwise</span><button class="button primary" id="runButton"><span>▶</span> Run analysis</button></div></section>
+      <section class="metrics-grid"><article class="metric-card"><div class="metric-label">MODEL STATUS <span>ⓘ</span></div><div class="metric-value" id="metricModel">Demo</div><div class="metric-foot"><span class="muted">Offline-ready · local files</span></div></article><article class="metric-card"><div class="metric-label">GENERATED TOKENS <span>ⓘ</span></div><div class="metric-value" id="metricTokens">—</div><div class="metric-foot"><span class="muted">Across latest trace</span></div></article><article class="metric-card"><div class="metric-label">TRACE LATENCY <span>ⓘ</span></div><div class="metric-value" id="metricLatency">—</div><div class="metric-foot"><span class="muted">End-to-end analysis</span></div></article><article class="metric-card"><div class="metric-label">INTERNALS CAPTURED <span>ⓘ</span></div><div class="metric-value" id="metricInternals">—</div><div class="metric-foot"><span class="muted">Only when model supports it</span></div></article></section>
+      <div class="tabs" id="tabs"><button data-view="overview" class="tab active">Overview</button><button data-view="trace" class="tab">Token trace</button><button data-view="weights" class="tab">Weights</button><button data-view="features" class="tab">Feature atlas</button><button data-view="interventions" class="tab">Interventions</button><button data-view="evaluations" class="tab">Evaluation</button></div>
+      <section id="panel" class="panel"></section>
+      <footer><span>LLM Insight Platform <span class="version">v0.1.0</span></span><span>Interpretability evidence is model- and method-dependent.</span><a href="/api/docs" target="_blank" rel="noreferrer">API docs ↗</a></footer>
+    </div>
+  </main>
+  <dialog id="modelDialog"><form method="dialog" class="dialog-card"><div class="dialog-top"><div><span class="section-kicker">OFFLINE INFERENCE</span><h2>Connect a local model</h2></div><button class="close" value="cancel">×</button></div><p>Choose a directory that already contains a compatible Hugging Face causal language model and tokenizer. The app will never download weights.</p><label class="field-label" for="modelPath">Local model directory</label><input id="modelPath" placeholder="/path/to/local/model" required><label class="field-label" for="device">Compute device</label><select id="device"><option value="auto">Auto detect</option><option value="cpu">CPU</option><option value="cuda">CUDA GPU</option></select><div class="dialog-hint">Linux/macOS: enter the full local path. Windows: use a path visible to the Python process.</div><div class="dialog-actions"><button class="button secondary" value="cancel">Cancel</button><button class="button primary" id="loadModel" value="default">Load local model</button></div><div id="loadMessage" class="form-message"></div></form></dialog>
+  <div id="toast" class="toast"></div>
+  <script src="/static/app.js"></script>
+</body></html>
