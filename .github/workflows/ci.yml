@@ -12,5 +12,5 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements-web.txt pytest httpx
-      - run: pytest -q
+      - run: PYTHONPATH=. pytest -q
       - run: python -m compileall -q app
