@@ -2,7 +2,7 @@
 
 **A local-first workbench for inspecting how open-weight language models produce their next token.** Run inference, inspect token scores and selected internals, inventory model parameters, compare layer-ablation experiments, and run a small repeatable prompt suite.
 
-> **Current release: v0.1.0.** This is a working single-user local pilot with an inspectable demo mode. It is not yet a multi-tenant or compliance-certified enterprise service. See [Security and production boundary](#security-and-production-boundary).
+> **Current release: v0.1.0.** This is a working single-user local pilot with an inspectable demo mode. It is not yet a multi-tenant or compliance-certified enterprise service. See [Security and production boundary](#security-and-production-boundary)
 
 ## What it does
 
